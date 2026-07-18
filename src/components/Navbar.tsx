@@ -8,7 +8,7 @@ const links = [
   { href: "#about", label: "About" },
   { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Projects" },
-  { href: "#experience", label: "Experience" },
+  { href: "#experience", label: "Journey" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -58,20 +58,20 @@ export function Navbar() {
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
       <div className={`transition-all duration-300 ${scrolled ? "glass-strong" : "bg-transparent"}`}>
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <a href="#" className="text-lg font-bold text-primary tracking-tight">
-            <span className="text-accent">.</span>portfolio
+        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+          <a href="#" className="text-base font-bold text-primary tracking-tight">
+            <span className="text-accent">chris</span>
           </a>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-sm transition-colors ${
                   active === l.href
-                    ? "text-accent"
-                    : "text-text-muted hover:text-accent"
+                    ? "text-accent font-medium"
+                    : "text-text-muted hover:text-text"
                 }`}
               >
                 {l.label}
@@ -80,7 +80,7 @@ export function Navbar() {
             <motion.button
               onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
               whileTap={{ scale: 0.9 }}
-              className="p-2 rounded-lg hover:bg-surface-alt/50 transition-colors"
+              className="p-1.5 rounded-md hover:bg-surface-alt transition-colors"
               aria-label="Toggle theme"
             >
               {currentTheme === "dark"
@@ -90,11 +90,11 @@ export function Navbar() {
             </motion.button>
           </div>
 
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex md:hidden items-center gap-1">
             <motion.button
               onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
               whileTap={{ scale: 0.9 }}
-              className="p-2 rounded-lg hover:bg-surface-alt/50 transition-colors"
+              className="p-1.5 rounded-md hover:bg-surface-alt transition-colors"
               aria-label="Toggle theme"
             >
               {currentTheme === "dark"
@@ -105,10 +105,10 @@ export function Navbar() {
             <motion.button
               onClick={() => setOpen(!open)}
               whileTap={{ scale: 0.9 }}
-              className="p-2 rounded-lg hover:bg-surface-alt/50 transition-colors"
+              className="p-1.5 rounded-md hover:bg-surface-alt transition-colors"
               aria-label="Toggle menu"
             >
-              {open ? <X className="w-5 h-5 text-text" /> : <Menu className="w-5 h-5 text-text" />}
+              {open ? <X className="w-4 h-4 text-text" /> : <Menu className="w-4 h-4 text-text" />}
             </motion.button>
           </div>
         </div>
@@ -120,16 +120,16 @@ export function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden glass-strong"
           >
-            <div className="px-4 py-4 flex flex-col gap-3">
+            <div className="px-6 py-4 flex flex-col gap-3">
               {links.map((l) => (
                 <a
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className={`text-sm font-medium transition-colors py-1 ${
+                  className={`text-sm transition-colors py-1 ${
                     active === l.href
-                      ? "text-accent"
-                      : "text-text-muted hover:text-accent"
+                      ? "text-accent font-medium"
+                      : "text-text-muted hover:text-text"
                   }`}
                 >
                   {l.label}
