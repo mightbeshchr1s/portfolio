@@ -129,11 +129,11 @@ export const contact = {
   badge: "Contact",
   title: "Let's Connect",
   description: "Have a project idea or just want to say hi? Reach out.",
-  email: "chocwebster@gmail.com",
+  email: "your4tune02@gmail.com",
   social: [
     { name: "GitHub", url: "https://github.com/your4tune02-bit", icon: "github" },
     { name: "LinkedIn", url: "https://linkedin.com/in/chris", icon: "linkedin" },
-    { name: "Email", url: "mailto:chocwebster@gmail.com", icon: "email" },
+    { name: "Email", url: "mailto:your4tune02@gmail.com", icon: "email" },
   ],
 };
 
