@@ -69,16 +69,7 @@ export function ContactSection() {
           ))}
         </motion.div>
 
-        <motion.a
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.4 }}
-          href={`mailto:${contact.email}`}
-           className="inline-block text-sm text-[var(--color-ink-light)] hover:text-[var(--color-ink)] transition-colors underline underline-offset-4"
-          style={{ fontFamily: "var(--font-mono)" }}
-        >
-          {contact.email}
-        </motion.a>
+
       </motion.div>
     </section>
   );
