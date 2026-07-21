@@ -1,26 +1,46 @@
 import type { Metadata } from "next";
+import { Unbounded, Inter, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Navbar } from "@/components/Navbar";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
 
+const unbounded = Unbounded({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Chris | Portfolio",
-  description: "2nd Year IT Student & Developer — building web and desktop applications.",
+  description: "IT Student & Developer — building web and desktop applications.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="antialiased">
-        <ThemeProvider
-          attribute="data-theme"
-          defaultTheme="system"
-          enableSystem
-        >
+    <html lang="en" className={`${unbounded.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className="antialiased bg-[var(--color-paper)] text-[var(--color-ink)]">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           <main>{children}</main>
           <Footer />
+          <ThemeToggle />
         </ThemeProvider>
       </body>
     </html>

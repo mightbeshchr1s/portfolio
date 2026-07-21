@@ -1,44 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { useTheme } from "next-themes";
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const links = [
   { href: "#about", label: "About" },
   { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#experience", label: "Journey" },
+  { href: "#projects", label: "Work" },
   { href: "#contact", label: "Contact" },
 ];
 
 export function Navbar() {
-  const { theme, setTheme, resolvedTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const sections = links.map((l) => document.getElementById(l.href.slice(1)));
-      const scrollY = window.scrollY + 120;
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = sections[i];
-        if (el && el.offsetTop <= scrollY) {
-          setActive(links[i].href);
-          return;
-        }
-      }
-      setActive("");
-    };
-    onScroll();
+    const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -48,89 +25,52 @@ export function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  const currentTheme = theme === "system" ? resolvedTheme : theme;
-
   return (
-    <motion.nav
-      className="fixed top-0 left-0 right-0 z-50"
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-    >
-      <div className={`transition-all duration-300 ${scrolled ? "glass-strong" : "bg-transparent"}`}>
-        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-          <a href="#" className="text-base font-bold text-primary tracking-tight">
-            <span className="text-accent">chris</span>
+    <nav className="fixed top-0 left-0 right-0 z-50">
+      <div className={`transition-all duration-300 ${scrolled ? "bg-[var(--color-paper)]/90 backdrop-blur-md border-b border-[var(--color-border)]" : "bg-transparent"}`}>
+        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+          <a
+            href="#"
+            className="text-xl font-bold text-[var(--color-ink)] tracking-tight"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            chris
           </a>
 
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-8">
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className={`text-sm transition-colors ${
-                  active === l.href
-                    ? "text-accent font-medium"
-                    : "text-text-muted hover:text-text"
-                }`}
+                className="text-sm text-[var(--color-ink-light)] hover:text-[var(--color-ink)] transition-colors"
               >
                 {l.label}
               </a>
             ))}
-            <motion.button
-              onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
-              whileTap={{ scale: 0.9 }}
-              className="p-1.5 rounded-md hover:bg-surface-alt transition-colors"
-              aria-label="Toggle theme"
-            >
-              {currentTheme === "dark"
-                ? <Sun className="w-4 h-4 text-text-muted" />
-                : <Moon className="w-4 h-4 text-text-muted" />
-              }
-            </motion.button>
           </div>
 
-          <div className="flex md:hidden items-center gap-1">
-            <motion.button
-              onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
-              whileTap={{ scale: 0.9 }}
-              className="p-1.5 rounded-md hover:bg-surface-alt transition-colors"
-              aria-label="Toggle theme"
-            >
-              {currentTheme === "dark"
-                ? <Sun className="w-4 h-4 text-text-muted" />
-                : <Moon className="w-4 h-4 text-text-muted" />
-              }
-            </motion.button>
-            <motion.button
-              onClick={() => setOpen(!open)}
-              whileTap={{ scale: 0.9 }}
-              className="p-1.5 rounded-md hover:bg-surface-alt transition-colors"
-              aria-label="Toggle menu"
-            >
-              {open ? <X className="w-4 h-4 text-text" /> : <Menu className="w-4 h-4 text-text" />}
-            </motion.button>
-          </div>
+          <button
+            onClick={() => setOpen(!open)}
+            className="md:hidden p-1.5"
+            aria-label="Toggle menu"
+          >
+            {open ? <X className="w-5 h-5 text-[var(--color-ink)]" /> : <Menu className="w-5 h-5 text-[var(--color-ink)]" />}
+          </button>
         </div>
 
         {open && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-strong"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="md:hidden bg-[var(--color-paper)] border-b border-[var(--color-border)]"
           >
-            <div className="px-6 py-4 flex flex-col gap-3">
+            <div className="px-6 py-5 flex flex-col gap-4">
               {links.map((l) => (
                 <a
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className={`text-sm transition-colors py-1 ${
-                    active === l.href
-                      ? "text-accent font-medium"
-                      : "text-text-muted hover:text-text"
-                  }`}
+                  className="text-sm text-[var(--color-ink-light)] hover:text-[var(--color-ink)] transition-colors"
                 >
                   {l.label}
                 </a>
@@ -139,6 +79,6 @@ export function Navbar() {
           </motion.div>
         )}
       </div>
-    </motion.nav>
+    </nav>
   );
 }

@@ -21,10 +21,9 @@ export const about = {
   title: "Who I Am",
   paragraphs: [
     "I'm Chris, a 2nd year IT student who likes building things that actually work. I've shipped web apps with Next.js and desktop tools with JavaFX — always focused on clean code and making things easy to use.",
-    "From an interactive Manila travel guide to a student collaboration platform, I enjoy turning ideas into working software. I'm always picking up new technologies and looking for the next thing to build.",
+    "I'm also one of the developers of Yield — a cooking app that turns ingredients into recipes with AI, barcode scanning, and offline access. From mobile APKs to web dashboards, I enjoy turning ideas into working software that people actually use.",
   ],
   avatar: "/avatar-placeholder.svg",
-  resumeUrl: "#",
 };
 
 export const skills = {
@@ -68,12 +67,12 @@ export const projects = {
   description: "Things I've built during my studies and personal time.",
   list: [
     {
-      title: "Manila City Guide",
+      title: "Yield",
       description:
-        "Interactive travel guide with 3D tilt cards, page transitions, animated mascot, and dark/light theme. Covers attractions, food, transport, and culture.",
-      tags: ["Next.js", "TypeScript", "Motion", "Tailwind"],
+        "AI-powered cooking app that scans barcodes, generates recipes from your pantry, and works offline on mobile. Built with Next.js, Capacitor, and a Python backend.",
+      tags: ["Next.js", "TypeScript", "Tailwind", "React", "Python"],
       image: "/project-placeholder.svg",
-      links: { live: "https://your4tune02-bit.github.io/portfolio", github: "https://github.com/your4tune02-bit/portfolio" },
+      links: { live: "https://frontend-eta-nine-70.vercel.app", github: "https://github.com/mightbechr1s/yield" },
     },
     {
       title: "SkillSync",
@@ -107,12 +106,12 @@ export const experience = {
       tags: ["Java", "Web Dev", "Databases", "OOP"],
     },
     {
-      role: "Manila City Guide",
-      company: "Personal Project",
+      role: "Yield",
+      company: "Team Project",
       period: "2026",
       description:
-        "Built a multi-page Next.js travel guide with 3D interactions, page transitions, and full dark/light theme support.",
-      tags: ["Next.js", "Motion", "Tailwind", "TypeScript"],
+        "Co-developed a full-stack cooking app with AI recipe generation, barcode scanning, offline support, and a cross-platform mobile APK via Capacitor.",
+      tags: ["Next.js", "TypeScript", "Tailwind", "Python", "Capacitor"],
     },
     {
       role: "SkillSync",
@@ -132,7 +131,7 @@ export const contact = {
   email: "your4tune02@gmail.com",
   social: [
     { name: "GitHub", url: "https://github.com/your4tune02-bit", icon: "github" },
-    { name: "LinkedIn", url: "https://linkedin.com/in/chris", icon: "linkedin" },
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/christian-canto-8869932b5", icon: "linkedin" },
     { name: "Email", url: "mailto:your4tune02@gmail.com", icon: "email" },
   ],
 };

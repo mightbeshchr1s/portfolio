@@ -2,7 +2,10 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowDown } from "lucide-react";
-import { hero } from "@/data/portfolio";
+import { hero, skills } from "@/data/portfolio";
+import { TechBadge } from "./TechBadge";
+
+const allTech = skills.categories.flatMap((c) => c.items.map((i) => i.name));
 
 export function HeroSection() {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -15,19 +18,23 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Subtle grid */}
-      <div className="absolute inset-0 bg-grid opacity-40" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="absolute inset-0 pointer-events-none"
+      >
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[var(--color-paper-alt)] rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[var(--color-border)] rounded-full blur-3xl" />
+      </motion.div>
 
-      {/* Single accent glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-accent/5 blur-[120px] rounded-full" />
-
-      <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
+      <div className="max-w-3xl mx-auto text-center relative z-10">
         <motion.span
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.4 }}
-          className="inline-block px-3 py-1 mb-6 text-xs font-medium tracking-wider uppercase text-accent bg-accent/10 rounded-full"
+          transition={{ duration: 0.4 }}
+           className="inline-block text-xs font-medium tracking-[0.15em] uppercase text-[var(--color-ink-lighter)] mb-6"
         >
           {hero.greeting}
         </motion.span>
@@ -35,28 +42,18 @@ export function HeroSection() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
-          className="text-5xl sm:text-6xl md:text-7xl font-bold text-primary mb-4 tracking-tight"
+          transition={{ duration: 0.6, ease: "easeOut" }}
+           className="text-6xl sm:text-7xl md:text-8xl font-bold text-[var(--color-ink)] mb-5 leading-[0.9]"
+          style={{ fontFamily: "var(--font-heading)" }}
         >
-          {hero.name.split("").map((ch, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 + i * 0.03, duration: 0.4 }}
-              className={ch === " " ? "" : "inline-block"}
-              style={ch === " " ? { width: "0.3em" } : undefined}
-            >
-              {ch === " " ? "\u00A0" : ch}
-            </motion.span>
-          ))}
+          {hero.name}
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.4 }}
-          className="text-base md:text-lg text-text-muted mb-3 max-w-md mx-auto leading-relaxed"
+          transition={{ delay: 0.2, duration: 0.5 }}
+           className="text-lg sm:text-xl text-[var(--color-ink-light)] max-w-lg mx-auto leading-relaxed mb-4"
         >
           {hero.subtitle}
         </motion.p>
@@ -64,15 +61,15 @@ export function HeroSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.4 }}
-          className="h-7 flex items-center justify-center"
+          transition={{ delay: 0.35, duration: 0.4 }}
+          className="h-8 flex items-center justify-center mb-8"
         >
           <motion.span
             key={roleIndex}
-            initial={{ opacity: 0, y: 8 }}
+            initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="text-sm text-accent font-medium"
+            transition={{ duration: 0.25 }}
+             className="text-sm font-medium text-[var(--color-ink-lighter)]"
           >
             {hero.roles[roleIndex]}
           </motion.span>
@@ -81,35 +78,49 @@ export function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.4 }}
-          className="flex flex-wrap gap-3 justify-center mt-10"
+          transition={{ delay: 0.5, duration: 0.4 }}
+          className="flex flex-wrap gap-3 justify-center mb-12"
         >
-          <motion.a
+          <a
             href={hero.cta.href}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-white text-sm font-medium shadow-md shadow-accent/20 hover:shadow-lg hover:shadow-accent/25 transition-all"
+             className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--color-ink)] text-[var(--color-paper)] text-sm font-medium rounded-full hover:bg-[var(--color-ink-light)] transition-all active:scale-95"
           >
             {hero.cta.label}
             <ArrowDown className="w-3.5 h-3.5" />
-          </motion.a>
-          <motion.a
+          </a>
+          <a
             href={hero.secondaryCta.href}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-card text-text-muted text-sm font-medium border border-border hover:border-accent/30 hover:text-accent transition-all"
+             className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--color-border-dark)] text-[var(--color-ink-light)] text-sm font-medium rounded-full hover:border-[var(--color-ink)] hover:text-[var(--color-ink)] transition-all active:scale-95"
           >
             {hero.secondaryCta.label}
-          </motion.a>
+          </a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7, duration: 0.5 }}
+          className="flex flex-wrap justify-center gap-2 max-w-xl mx-auto"
+        >
+          {allTech.map((t, i) => (
+            <motion.div
+              key={t}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.7 + i * 0.04, duration: 0.3 }}
+            >
+              <TechBadge name={t} />
+            </motion.div>
+          ))}
         </motion.div>
       </div>
 
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 5, 0] }}
+        animate={{ y: [0, 6, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       >
-        <a href="#about" className="text-text-muted hover:text-accent transition-colors">
+        <a href="#about" className="text-[var(--color-ink-lighter)] hover:text-[var(--color-ink)] transition-colors block p-2">
           <ArrowDown className="w-4 h-4" />
         </a>
       </motion.div>
