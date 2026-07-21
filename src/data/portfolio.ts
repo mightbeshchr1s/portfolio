@@ -130,8 +130,7 @@ export const contact = {
   description: "Have a project idea or just want to say hi? Reach out.",
   email: "your4tune02@gmail.com",
   social: [
-    { name: "GitHub", url: "https://github.com/your4tune02-bit", icon: "github" },
-    { name: "LinkedIn", url: "https://www.linkedin.com/in/christian-canto-8869932b5", icon: "linkedin" },
+    { name: "GitHub", url: "https://github.com/mightbechr1s", icon: "github" },
     { name: "Email", url: "mailto:your4tune02@gmail.com", icon: "email" },
   ],
 };
